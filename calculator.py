@@ -13,7 +13,7 @@ class CalculatorWindow(QtWidgets.QMainWindow,Ui_Calculator):
         self.setupUi(self)
         self.show()
 
-        # Connect buttons
+        # Connect the buttons
 
         self.b0.clicked.connect(self.digit_pressed)
         self.b1.clicked.connect(self.digit_pressed)
@@ -52,7 +52,7 @@ class CalculatorWindow(QtWidgets.QMainWindow,Ui_Calculator):
 
 
     def digit_pressed(self):
-
+        
         button = self.sender()
 
         #Clear the screen
@@ -72,9 +72,15 @@ class CalculatorWindow(QtWidgets.QMainWindow,Ui_Calculator):
         self.label.setText(newLabel)
 
     def decimal_pressed(self):
+        
+        #Code for "." button
+        
         self.label.setText(self.label.text() + '.')
 
     def unary_operation_pressed(self):
+        
+        #Code for "+/- , % "
+        
         button = self.sender()
         labelNumber = float(self.label.text())
         if button.text() == '+/-':
@@ -86,6 +92,9 @@ class CalculatorWindow(QtWidgets.QMainWindow,Ui_Calculator):
         self.label.setText(newLabel)
 
     def binary_operation_pressed(self):
+        
+        #Code for " + , - , * , / "
+        
         button = self.sender()
 
         self.firstNum = float(self.label.text())
@@ -93,24 +102,33 @@ class CalculatorWindow(QtWidgets.QMainWindow,Ui_Calculator):
         button.setChecked(True)
 
     def equals_pressed(self):
+        
+        #Code for "=" button
 
         secondNum = float(self.label.text())
-
+            
+            # if "+" is pressed the it will add first number and the second number"
         if self.plus.isChecked():
             labelNumber = self.firstNum + secondNum
             newLabel = format(labelNumber,'.15g')
             self.label.setText(newLabel)
             self.plus.setChecked(False)
+            
+            # if " - " is pressed then it will substract the second number fromthe first number
         elif self.minus.isChecked():
             labelNumber = self.firstNum - secondNum
             newLabel = format(labelNumber, '.15g')
             self.label.setText(newLabel)
             self.minus.setChecked(False)
+            
+            # if "/" is pressed then it will divide the numbers
         elif self.div.isChecked():
             labelNumber = self.firstNum / secondNum
             newLabel = format(labelNumber,'.15g')
             self.label.setText(newLabel)
             self.div.setChecked(False)
+            
+            #if "*" then it will multiply the numbers
         elif self.multiply.isChecked():
             labelNumber = self.firstNum * secondNum
             newLabel = format(labelNumber,'.15g')
@@ -120,6 +138,8 @@ class CalculatorWindow(QtWidgets.QMainWindow,Ui_Calculator):
         self.userIsTypingSecondNumber = False
 
     def clear_pressed(self):
+        
+        # code for the "C" button
 
         self.plus.setChecked(False)
         self.minus.setChecked(False)
